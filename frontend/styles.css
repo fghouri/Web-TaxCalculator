@@ -1,0 +1,58 @@
+body {
+    text-align: center;
+    font-family: 'Roboto', sans-serif; /* Use Google Font */
+    background-color: #f4f4f4; /* Light background color */
+    margin: 0;
+    padding: 20px;
+}
+h1 {
+    color: #333; /* darker color, better contrasts */
+}
+form {
+    display: inline-block;
+    margin-top: 20px;
+}
+label {
+    display: block;
+    margin: 10px 0 5px;
+    color: #666;
+}
+.input-group {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 15px;
+    font-size: 20px;
+    color: #666;
+}
+.input-group span {
+    margin-right: 5px;
+}
+input [type="text"]:focus { 
+    border-color: #007bff;
+    outline: none;
+}
+button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+}
+button:hover {
+    background-color: #0056b3;
+}
+.container { 
+    max-width: 400px; /* Limits the width of the container */
+    margin: 0 auto; /* Centers the container horizontally */
+    background-color: #fff; /* White background for the form */
+    padding: 20px;
+    border-radius: 8px; /* Rounded corners */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Adds a subtle shadow */
+}
+.result-msg {
+    margin-top: 20px;
+}
