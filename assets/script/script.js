@@ -19,14 +19,57 @@ const taxBrackets = [
 const calcBtn = document.getElementById('calc');
 const salaryInput = document.getElementById('salary');
 
+// modal
+const openModalButtons = document.querySelectorAll('[data-modal-target]')
+const closeModalButtons = document.querySelectorAll('[data-close-button]')
+const overlay = document.getElementById('overlay')
+
+// event listeners
 calcBtn.addEventListener("click", calculateTaxes);
+
+openModalButtons.forEach(button => {
+    button.addEventListener('click', () => {
+      const modal = document.querySelector(button.dataset.modalTarget)
+      openModal(modal)
+    })
+})
+  
+overlay.addEventListener('click', () => {
+    const modals = document.querySelectorAll('.modal.active')
+    modals.forEach(modal => {
+      closeModal(modal)
+    })
+})
+  
+closeModalButtons.forEach(button => {
+    button.addEventListener('click', () => {
+      const modal = button.closest('.modal')
+      closeModal(modal)
+    })
+})
+  
+
+function openModal(modal) {
+    if (modal == null) return
+    modal.classList.add('active')
+    overlay.classList.add('active')
+}
+  
+function closeModal(modal) {
+    if (modal == null) return
+    modal.classList.remove('active')
+    overlay.classList.remove('active')
+}
 
 function calculateTaxes() {
     const salary = parseFloat(salaryInput.value);
 
+    // get the modal text element
+    var modalContent = document.querySelector('.modal-body');
+
     // Validate input
-    if (isNaN(salary) || salary == null || salary < SALARY_MIN) {
-        return alert(`ERROR: Invalid input (number must be > ${SALARY_MIN})`);
+    if (isNaN(salary) || salary == null || salary < SALARY_MIN) { 
+        return modalContent.innerHTML = "ERROR: Invalid Input. (Must be higher than 15080.)";
     }
 
     // Calculate social security and Medicare taxes
@@ -70,12 +113,11 @@ function calculateTaxes() {
     let mTax = taxes.mTax.toFixed(2);
     mTax = parseFloat(mTax).toLocaleString('en-US');
 
-    alert(
-        `Yearly Salary After Tax: $${yearlySalaryAfterTax}\n` +
-        `Gross Monthly: $${grossMonthly}\n` +
-        `Monthly After Tax: $${monthlySalaryPostTax}\n\n` +
-        `Social Security Tax: $${ssTax}\n` +
-        `Medicare Tax: $${mTax}\n` +
-        `Federal Income Tax: $${incomeTax}`
-    ); 
+    modalContent.innerHTML = 
+        `Yearly Salary After Tax: $${yearlySalaryAfterTax}<br>` +
+        `Gross Monthly: $${grossMonthly}<br>` +
+        `Monthly After Tax: $${monthlySalaryPostTax}<br><br>` +
+        `Social Security Tax: $${ssTax}<br>` +
+        `Medicare Tax: $${mTax}<br>` +
+        `Federal Income Tax: $${incomeTax}`;
 }

@@ -17,7 +17,17 @@
             <input type="text" id="salary" name="salary" required>
         </div>
         <br><br>
-        <button type = "button" id = "calc">Calculate</button>
+        <button data-modal-target = "#modal" type = "button" id = "calc">Calculate</button>
     </div>
+
+    <!--- Modal -->
+    <div class = "modal" id = "modal">
+        <div class = "modal-header">
+            <div class = "title">Tax Calculator</div>
+            <button data-close-button class = "close-btn">&times;</button>
+        </div>
+    <div class = "modal-body">Content</div>
+    </div>
+    <div id = "overlay"></div>
 </body>
 </html>
